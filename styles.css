@@ -165,6 +165,14 @@
   }
 }
 
+/*TESTING NOTES
+I tested a narrow viewport by navigating to DevTools within Chrome and setting my viewing dimensions to 375 x 691px. All of the media stacked correctly
+and was displayed how I wanted it to be. For my wide viewport test, I set the dimensions to 768 x 921px. Everything scaled correctly and the cards displayed in
+the ideal layout. For 200% zoom testing, I navigated to the zoom % toggle in the dimensions bar and set my zoom to 200%. There was no content overflow
+and everything displayed as desired. To test a slow network connection, I went to the Network tab and set the dropdown to "Slow 4G". Everything stayed readable and all
+content, including the SVG, loaded as desired. The placeholder image maintained its correct sizing as well.
+*/
+
 /*DECISION NOTES
 Media Decision: I used the command of max-inline-size 100% to prevent my images, SVGs, and videos from spilling out of their containers.
 This helps to create a more responsive site since media will be able to be scaled while still maintaining their accurate properties.
