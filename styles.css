@@ -1,0 +1,177 @@
+@layer reset, base, layout, components, utilities;
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+  }
+}
+
+@layer base {
+  :root {
+    --color-text: #191919;
+    --color-surface: #ffffff;
+    --color-muted: #f7f7f7;
+    --color-accent: #8c1d40;
+    --color-gold: #ffc627;
+
+    /*Typography Tokens*/
+    --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-heading: Playfair Display, sans-serif;
+
+    --step-0: 1rem;
+    --step-2: 1.5rem;
+    --step-4: clamp(1.5rem, 4vw, 2rem);
+
+    --line-body: 1.5;
+    --line-heading: 1.2;
+
+    /*Measure*/
+    --measure: 68ch;
+
+    /*Spacing*/
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+  }
+
+  body {
+    color: var(--color-text);
+    background: var(--color-surface);
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    line-height: var(--line-body);
+  }
+
+  img,
+  svg,
+  video {
+    max-inline-size: 100%;
+    block-size: auto;
+  }
+
+  h1,
+  h2,
+  h3 {
+    line-height: var(--line-heading);
+    font-family: var(--font-heading);
+  }
+
+  h1 {
+    font-size: var(--step-4);
+  }
+
+  h2 {
+    font-size: var(--step-2);
+  }
+}
+
+@layer layout {
+  main {
+    inline-size: min(100% - 2rem, 72rem);
+    margin-inline: auto;
+  }
+
+  .hero {
+    display: grid;
+    gap: var(--space-6);
+    padding-block: var(--space-8);
+  }
+
+  .section {
+    padding-block: var(--space-8);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 56rem) {
+    .hero {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+  }
+}
+
+@layer components {
+  .site-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: space-between;
+    padding: var(--space-4);
+    background: var(--color-muted);
+  }
+
+  .nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .hero-media {
+    margin: 0;
+  }
+
+  .hero-media img,
+  .placeholder-image {
+    inline-size: 100%;
+    aspect-ratio: 3 / 2;
+    border-radius: .5rem;
+  }
+
+  .hero-media img {
+    object-fit: cover;
+  }
+
+  .placeholder-image {
+    background:
+      linear-gradient(135deg, rgb(140 29 64 / .85), rgb(255 198 39 / .85)),
+      repeating-linear-gradient(45deg, #f7f7f7 0 12px, #ffffff 12px 24px);
+    border: 1px solid #d0d0d0;
+  }
+
+  .section-heading {
+    display: flex;
+    gap: var(--space-4);
+    align-items: start;
+    max-inline-size: var(--measure);
+  }
+
+  .card,
+  .media-check {
+    padding: var(--space-4);
+    border: 1px solid #d0d0d0;
+    border-radius: .5rem;
+    background: var(--color-surface);
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}
+
+/*DECISION NOTES
+Media Decision: I used the command of max-inline-size 100% to prevent my images, SVGs, and videos from spilling out of their containers.
+This helps to create a more responsive site since media will be able to be scaled while still maintaining their accurate properties.
+
+Typography Decision: I chose to use Playfair Display for my font headings to create a clear contrast with my system-ui based body text.
+This will create a clear visual hierarchy that is still cohesive while providing a sense of contrast. I also used the clamp() command
+for my h1 font so that the heading can scale accurately across different viewport sizes.
+
+Layout-Shift Prevention Decision: I established specific width and height attributes for my SVG icon so that all dimensions are able to be set before the browser itself loads.
+This helps the browser to load quickly while maintaining any expected layout shifts and also ensures that the icon displays accurately.*/
